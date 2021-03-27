@@ -1,6 +1,10 @@
 package app
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"my-blog-service-go/pkg/errcode"
+	"net/http"
+)
 
 type Response struct {
 	Ctx *gin.Context
@@ -20,3 +24,24 @@ func NewResponse(ctx *gin.Context) *Response {
 		Ctx: ctx,
 	}
 }
+
+//生成响应数据
+func (r *Response) ToResponse(data interface{})  {
+	if data == nil {
+		data = gin.H{}
+	}
+	r.Ctx.JSON(http.StatusOK, data)
+}
+
+//返回带有错误的响应数据
+func (r *Response) ToErrorResponse(err *errcode.Error)  {
+	response := gin.H{"code": err.Code(), "msg": err.Msg()}
+	details := err.Details()
+	if len(details) > 0  {
+		response["details"] = details
+	}
+	r.Ctx.JSON(err.StatusCode(), response)
+}
+
+
+
