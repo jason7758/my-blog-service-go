@@ -10,7 +10,7 @@ type Response struct {
 	Ctx *gin.Context
 }
 
-type pager struct {
+type Pager struct {
 	//页码
 	Page int `json:"page"`
 	//每页数量

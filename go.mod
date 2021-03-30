@@ -26,7 +26,10 @@ require (
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.7.1
+	github.com/uber/jaeger-client-go v2.25.0+incompatible // indirect
+	github.com/uber/jaeger-lib v2.4.1+incompatible // indirect
 	github.com/ugorji/go v1.2.4 // indirect
+	go.uber.org/atomic v1.7.0 // indirect
 	golang.org/x/crypto v0.0.0-20210322153248-0c34fe9e7dc2 // indirect
 	golang.org/x/sys v0.0.0-20210326220804-49726bf1d181 // indirect
 	golang.org/x/text v0.3.5 // indirect

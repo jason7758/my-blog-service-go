@@ -28,6 +28,8 @@ type EmailSettingS struct {
 	UserName string
 	Password string
 	IsSSL bool
+	From string
+	To []string
 }
 
 type JWTSettingS struct {
