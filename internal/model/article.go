@@ -7,11 +7,11 @@ import (
 
 type Article struct {
 	*Model
-	Title string `json:"title"`
-	Desc string `json:"desc"`
-	Context string `json:"context"`
+	Title         string `json:"title"`
+	Desc          string `json:"desc"`
+	Context       string `json:"context"`
 	CoverImageUrl string `json:"cover_image_url"`
-	State uint8 `json:"state"`
+	State         uint8  `json:"state"`
 }
 
 type ArticleSwagger struct {
@@ -107,10 +107,15 @@ func (a Article) ListByTagID(db *gorm.DB, tagID uint32, pageOffset, pageSize int
 	return articles, nil
 }
 
-func (a Article) CountByTagID(db *gorm.DB, TagID uint32) (int, error) {
+func (a Article) CountByTagID(db *gorm.DB, tagID uint32) (int, error) {
 	var count int
 	err := db.Table(ArticleTag{}.TableName() + " AS at").
-		Joins("LEFT JOIN `"+Tag{}.TableName() + " AS t ON at.tag_id = t.id").
+		Joins("LEFT JOIN `"+Tag{}.TableName() + "` AS t ON at.tag_id = t.id").
 		Joins("LEFT JOIN `"+Article{}.TableName()+"` AS ar ON at.article_id = ar.id").
-		Where("at.`tag_id` = ? AND")
+		Where("at.`tag_id` = ? AND ar.state = ? AND ar.is_del = ?", tagID, a.State, 0).
+		Count(&count).Error
+	if err != nil {
+		return 0, err
+	}
+	return count, nil
 }
