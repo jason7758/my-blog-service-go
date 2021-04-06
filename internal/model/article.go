@@ -9,7 +9,7 @@ type Article struct {
 	*Model
 	Title         string `json:"title"`
 	Desc          string `json:"desc"`
-	Context       string `json:"context"`
+	Content       string `json:"context"`
 	CoverImageUrl string `json:"cover_image_url"`
 	State         uint8  `json:"state"`
 }
