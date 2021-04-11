@@ -1,8 +1,9 @@
 package model
 
 import (
-	"github.com/jinzhu/gorm"
 	"my-blog-service-go/pkg/app"
+
+	"github.com/jinzhu/gorm"
 )
 
 type Tag struct {
@@ -52,11 +53,11 @@ func (t Tag) List(db *gorm.DB, pageOffset, pageSize int) ([]*Tag, error) {
 func (t Tag) ListByIDs(db *gorm.DB, ids []uint32) ([]*Tag, error) {
 	var tags []*Tag
 	db = db.Where("state = ? AND is_del = ?", t.State, 0)
-	err := db.Where("id IN (?)", ids).Finde(&tags).Error
+	err := db.Where("id IN (?)", ids).Find(&tags).Error
 	if err != nil && err != gorm.ErrRecordNotFound {
 		return nil, err
 	}
-	return tags, nill
+	return tags, nil
 
 }
 
