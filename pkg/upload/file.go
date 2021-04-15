@@ -69,6 +69,13 @@ func CheckMaxSize(t FileType, f multipart.File) bool {
 	return false
 }
 
+//检查有权限访问
+func CheckPermission (dst string) bool  {
+	_, err := os.Stat(dst)
+
+	return os.IsPermission(err)
+}
+
 func CreateSavePath(dst string, perm os.FileMode) error {
 	err := os.MkdirAll(dst, perm)
 	if err != nil {
