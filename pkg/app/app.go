@@ -33,6 +33,18 @@ func (r *Response) ToResponse(data interface{})  {
 	r.Ctx.JSON(http.StatusOK, data)
 }
 
+//带分页输出内容返回
+func (r *Response) ToResponseList(list interface{}, totalRows int) {
+	r.Ctx.JSON(http.StatusOK, gin.H{
+		"list": list,
+		"pager": Pager{
+			Page: GetPage(r.Ctx),
+			PageSize: GetPageSize(r.Ctx),
+			TotalRows: GetPageSize(r.Ctx),
+		},
+	})
+}
+
 //返回带有错误的响应数据
 func (r *Response) ToErrorResponse(err *errcode.Error)  {
 	response := gin.H{"code": err.Code(), "msg": err.Msg()}
