@@ -12,6 +12,7 @@ require (
 	github.com/go-playground/universal-translator v0.17.0
 	github.com/go-playground/validator/v10 v10.4.1
 	github.com/golang/protobuf v1.4.3 // indirect
+	github.com/google/martian v2.1.0+incompatible
 	github.com/jinzhu/gorm v1.9.16
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/juju/ratelimit v1.0.1
@@ -27,6 +28,7 @@ require (
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/spf13/viper v1.7.1
+	github.com/swaggo/gin-swagger v1.3.0
 	github.com/uber/jaeger-client-go v2.25.0+incompatible
 	github.com/uber/jaeger-lib v2.4.1+incompatible // indirect
 	github.com/ugorji/go v1.2.4 // indirect
