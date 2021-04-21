@@ -3,6 +3,7 @@ package model
 import (
 	"fmt"
 	otgorm "github.com/eddycjy/opentracing-gorm"
+	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	"my-blog-service-go/global"
 	"my-blog-service-go/pkg/setting"
@@ -20,7 +21,7 @@ type Model struct {
 	ModifiedBy string `json:"modified_by"`
 	CreatedOn  uint32 `json:"created_on"`
 	ModifiedOn uint32 `json:"modified_on"`
-	DeleteOn   uint32 `json:"delete_on"`
+	DeletedOn   uint32 `json:"deleted_on"`
 	IsDel      uint8  `json:"is_del"`
 }
 // 创建数据库连接
