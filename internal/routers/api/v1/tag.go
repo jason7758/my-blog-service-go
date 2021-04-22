@@ -82,7 +82,8 @@ func (t Tag) Create(c *gin.Context)  {
 		response.ToErrorResponse(errcode.ErrorCreateTagFail)
 		return
 	}
-	response.ToResponse(gin.H{})
+	var data = map[string]bool{"result": true}
+	response.ToResponse(data)
 	return
 }
 
