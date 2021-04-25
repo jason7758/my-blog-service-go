@@ -1,6 +1,7 @@
 package app
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"my-blog-service-go/pkg/errcode"
 	"net/http"
@@ -24,6 +25,8 @@ type ResDataList struct {
 }
 
 func NewResponse(ctx *gin.Context) *Response {
+	costTime,_ :=  ctx.Get("cost_time")
+	fmt.Println("ss", costTime)
 	return &Response{
 		Ctx: ctx,
 	}
@@ -40,6 +43,13 @@ func (r *Response) ToResponse(data interface{})  {
 
 //带分页输出内容返回
 func (r *Response) ToResponseList(list interface{}, totalRows int) {
+	costTime, ok := r.Ctx.Get("cost_time")  //取值 实现了跨中间件取值
+	fmt.Println("%v", r.Ctx)
+	fmt.Println("Get cost_time result ：", ok ) //t2与t1相差： 50
+	if !ok{
+		costTime = ""
+	}
+
 	r.Ctx.JSON(http.StatusOK, gin.H{
 		"code": http.StatusOK,
 		"message" : "success",
@@ -52,6 +62,7 @@ func (r *Response) ToResponseList(list interface{}, totalRows int) {
 				TotalRows: GetPageSize(r.Ctx),
 			},
 		},
+		"time": costTime,
 	})
 }
 
